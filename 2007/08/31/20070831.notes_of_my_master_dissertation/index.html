@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"venturezhao.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":"auto","version":"8.18.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="2007-08-01 18:07终于找到VC下算法的问题了~原来LMS算法对自相关性比较强的信号收敛效果那么不明显啊.它可以将冲击响应分解成多个,并且使时域波形仍旧保持一致.难道说在满足单一频率下系统传函不变,系统的冲击响应可以有很多表现形式.系统能控能观是否如此有关呢?还是在单一频率下,系统误差曲面上有好多极小点都趋近于0?是否有其他自适应滤波器可以求出在此情况下的系统唯一的传递函数呢?ms不太">
+<meta property="og:type" content="article">
+<meta property="og:title" content="毕设一月，贴调试笔记，回家喽">
+<meta property="og:url" content="http://venturezhao.github.io/2007/08/31/20070831.notes_of_my_master_dissertation/index.html">
+<meta property="og:site_name" content="潜海凌云录">
+<meta property="og:description" content="2007-08-01 18:07终于找到VC下算法的问题了~原来LMS算法对自相关性比较强的信号收敛效果那么不明显啊.它可以将冲击响应分解成多个,并且使时域波形仍旧保持一致.难道说在满足单一频率下系统传函不变,系统的冲击响应可以有很多表现形式.系统能控能观是否如此有关呢?还是在单一频率下,系统误差曲面上有好多极小点都趋近于0?是否有其他自适应滤波器可以求出在此情况下的系统唯一的传递函数呢?ms不太">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2007-08-30T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-10-03T09:49:31.350Z">
+<meta property="article:author" content="wenzhe">
+<meta property="article:tag" content="mood">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://venturezhao.github.io/2007/08/31/20070831.notes_of_my_master_dissertation/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://venturezhao.github.io/2007/08/31/20070831.notes_of_my_master_dissertation/","path":"2007/08/31/20070831.notes_of_my_master_dissertation/","title":"毕设一月，贴调试笔记，回家喽"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>毕设一月，贴调试笔记，回家喽 | 潜海凌云录</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">潜海凌云录</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">路漫漫其修远兮，吾将上下而求索</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">wenzhe</p>
+  <div class="site-description" itemprop="description">This is wenzhe's personal blog.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://venturezhao.github.io/2007/08/31/20070831.notes_of_my_master_dissertation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="wenzhe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="潜海凌云录">
+      <meta itemprop="description" content="This is wenzhe's personal blog.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="毕设一月，贴调试笔记，回家喽 | 潜海凌云录">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          毕设一月，贴调试笔记，回家喽
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2007-08-31 00:00:00" itemprop="dateCreated datePublished" datetime="2007-08-31T00:00:00+08:00">2007-08-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-03 17:49:31" itemprop="dateModified" datetime="2023-10-03T17:49:31+08:00">2023-10-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BF%83%E6%83%85/" itemprop="url" rel="index"><span itemprop="name">心情</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>2007-08-01 18:07<br>终于找到VC下算法的问题了~原来LMS算法对自相关性比较强的信号收敛效果那么不明显啊.它可以将冲击响应分解成多个,并且使时域波形仍旧保持一致.<br>难道说在满足单一频率下系统传函不变,系统的冲击响应可以有很多表现形式.系统能控能观是否如此有关呢?还是在单一频率下,系统误差曲面上有好多极小点都趋近于0?<br>是否有其他自适应滤波器可以求出在此情况下的系统唯一的传递函数呢?ms不太可能.</p>
+<p>btw:呵呵~~有时候发现自己都成了睡罗汉了…明天开始,清醒!</p>
+<span id="more"></span>
+
+<p>2007-08-05  17:41<br>AIC部分的DSP程序 第一版完工.第一版里面实现了对AD,程控运放,片内外设Timer0,SPI口的操作,并且都调试成功了.底层硬件部分还有串口需要完成.<br>AWG部分刚刚搭完了框架.<br>现在比较迷茫的是: 为了结构清晰,我特地将底层函数都封装了起来,但是封装到中断的时候,由于中断服务程序与控制逻辑联系非常紧密,我应该将它写进子函数当作lib来看待呢.还是写在控制算法中去,当作控制算法中的函数来看待…伤脑筋啊.</p>
+<p>2007-08-07  09:21<br>AWG的硬件部分业已调试通过.今天这是总结一下昨天所做的工作.SPI接收FIFO寄存器中影响因子配置为1方可,否则他会一直进中断而无法执行其他程序~<br>AWG版本升级到1.0.1了~~ 完成它的功能吧~</p>
+<p>2007-08-08  14:17<br>AWG的控制算法终于写完了.不过正确与否还有待检验<del>算是搞明白了Flash分配那个部分的功能,挺好玩,挺好用</del>嘻嘻<br>下来写AIC相关的东西了.</p>
+<p>2007-08-08  23:06<br>呵呵~<del>终于解决了一个困扰了好久的问题.看门狗和复位线…没相当他居然没焊上…看门狗这种rubbish…谁还用啊!.焊掉.<br>还有就是AWG模块基本完成了~~下来主要就是好好做算法了~~<br>下雨了…哈哈~~好天气</del>好心情~</p>
+<p>2007-08-09  17:25<br>啊…今天的GPIO口配置的好是郁闷…他们居然受EALLOW和EDIS保护.之前对照例程看了800遍居然没认出来…惭愧啊…</p>
+<p>2007-08-09  21:02<br>博士师兄远道而来, 问了问他的算法的一些问题. 虽然不大,但也算有些收获.我还是先把最基本的算法实现再说啦~<br>晚上校准了下AD的采集通道.4层的板子,估计了一下.误差有20LSB,大约是1mV.不错.还可接受~~<br>突然发现笔记变成流水帐了…明天在里面养乌龟..哈哈~~</p>
+<p>2007-08-12  10:59<br>一不留神第二天板子出问题了，唉。。。修了两天才能用。。。失败啊。。。<br>不 过还有些问题值得商榷：为什么DSP复位后看门狗会自动开启？以前都是默认关着的哦。并且datasheet上也说默认为关的。下午去机械那边查查书，看复位时的跳线有没有问题吧。开机后为什么一定要手动加上10ms的延时？以前一直以为是给后续器件提供复位时间，不过从今天调板子的情况来看，ms是DSP自己数据总线上的数据不对。还有数据总线上的电平怎么敢超过3.3V而直接飙升至4V!不烧片子才怪, 不过确实怪了…呵呵</p>
+<p>2007-08-12  17:39<br>AIC的串口调通了，呵呵~~ 下来该定协议啦~~ 自己的协议自己定就是爽，不过自由度太高了，定起来不免有些难以下手。好好考虑下~~<br>AIC版本升级喽~~ 请客吃饭去喽~~</p>
+<p>2007-08-13  04:02<br>唉.鸡肋鸡肋啊….真是鸡肋啊…不知当时是怎么想的,心血来潮,学人家PC机干嘛…人家多任务,速度快,不在乎这点效率.你模拟出个缓冲区来,还没法子给人家定时刷新,不是找抽么…不过辛辛苦苦写了这么多了.就这么删了啊…可惜可惜…唉.</p>
+<p>2007-08-15  14:28<br>哈哈~~半路杀出的程咬金终于被我干掉啦~~再努力一下，把VC下的图形给画出来就perfect了~~<br>DSP现在上电后必须先初始化了。。。还不知问题出在哪里。<br>一个插着仿真器，另一个就不工作。这个怀疑是SPI口复位端一直为低造成的，加上拉电阻试试。。。</p>
+<p>2007-08-15  16:50<br>不容易啊不容易…终于完成了一个版本~~VC写的上位机.DSP的下位机…<br>可惜软件工程学的太不好…<br>写的叫个乱啊…<br>唉~~呵呵~~<br>不过不管怎么说,那过去交差先~~</p>
+<p>2007-08-21  10:57<br>怎么过去一个礼拜了?奇怪的很,得好好想想这一个礼拜都干嘛了…一个报告用的了这么久么?不对劲啊…<br>唉,赶紧写吧…四天里要把这个算法实现了的.</p>
+<p>2007-08-21  17:10<br>功力恢复到七成了,coding这事情真是需要一口气冲到底的哦…啥时候我也闭关玩失踪~~集中精神写完它!</p>
+<p>2007-08-23  17:53<br>协议算是初步定完了,唉,不能安心做一件事情就是倒霉. 今夜里一定要把那个网络的结了.明天专心实现算法.<br>啊….呜….(狼嚎)…</p>
+<p>2007-08-24  15:07<br>网络还没有做完,唉.还得赔上一个晚上…不过看来一个人的思路确实好难转变的,这几天白天在航天学院这边做SPI,SCI的协议,总是在考虑一个 BYTE一个BYTE的事情,一下子去定网络的东西,思路没扭转过来,走了不小的弯路:网络通过TCP&#x2F;IP协议栈已经实现了我SPI&#x2F;SCI所做的工作.两边直接对等传输数据流或数据报格式的数据. 还有就是通过UNIX和Windows实现socket的途径,可以明显的看出他们的区别,呵呵~~我怎么还是比较喜欢UNIX的实现方式…也许是因为socket本来就是UNIX定出的标准,自己实现起来一切都是那么优美,不会因为进程阻塞而出这样那样的问题. 惨了惨了,中毒不浅哦~~<br>终于算是把AIC模块的协议给定完了,写个上位机.实现一下下算法吧~~离闪人回家还有2天喽~~</p>
+<p>2007-08-24  18:49<br>算法部分还差两个函数没有实现,唉…流程算是写的差不多了,再写个上位机程序,连着调一下啦~~<br>吃饭写网络去喽~~~</p>
+<p>2007-08-25  12:54<br>网络基本完成了。我的可怜的毕设啊。。。只好回家来了再继续了。。。<br>bg:跳票…又是跳票…可怜我忠实的fans啊~~</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/mood/" rel="tag"># mood</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2007/07/23/20070723.my_qq_signature/" rel="prev" title="整理了一下QQ签名档">
+                  <i class="fa fa-angle-left"></i> 整理了一下QQ签名档
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2007/09/15/20070915.it_is_time_to_hunting_work/" rel="next" title="要好好找工作了...">
+                  要好好找工作了... <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">wenzhe</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.8/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

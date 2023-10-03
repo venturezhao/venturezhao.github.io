@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"venturezhao.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":"auto","version":"8.18.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="说来我也不是正经做GPU架构的，不过耳濡目染了很久写一写自己的心得。GPU架构设计其实算是一个多学科交叉的领域，尤其是今天这种GPGPU改朝换代的年代，更需要多多吸收相关领域的知识。这包含了计算机体系结构，图形算法，编译技术，集成电路，以及各种流计算应用等五部分~~ 我也会分五个帖子讲完~~ 。其实我主要聚焦在计算机体系结构，图形算法方面，就这两个领域还算是二把刀。其他领域也是不熟悉到当不上二把刀">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GPU架构师是怎样炼成的">
+<meta property="og:url" content="http://venturezhao.github.io/2013/02/04/20130204.how_to_be_a_gpu_architecture/index.html">
+<meta property="og:site_name" content="潜海凌云录">
+<meta property="og:description" content="说来我也不是正经做GPU架构的，不过耳濡目染了很久写一写自己的心得。GPU架构设计其实算是一个多学科交叉的领域，尤其是今天这种GPGPU改朝换代的年代，更需要多多吸收相关领域的知识。这包含了计算机体系结构，图形算法，编译技术，集成电路，以及各种流计算应用等五部分~~ 我也会分五个帖子讲完~~ 。其实我主要聚焦在计算机体系结构，图形算法方面，就这两个领域还算是二把刀。其他领域也是不熟悉到当不上二把刀">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2013-02-03T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-10-03T10:14:04.874Z">
+<meta property="article:author" content="wenzhe">
+<meta property="article:tag" content="VLSI">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://venturezhao.github.io/2013/02/04/20130204.how_to_be_a_gpu_architecture/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://venturezhao.github.io/2013/02/04/20130204.how_to_be_a_gpu_architecture/","path":"2013/02/04/20130204.how_to_be_a_gpu_architecture/","title":"GPU架构师是怎样炼成的"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>GPU架构师是怎样炼成的 | 潜海凌云录</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">潜海凌云录</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">路漫漫其修远兮，吾将上下而求索</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">wenzhe</p>
+  <div class="site-description" itemprop="description">This is wenzhe's personal blog.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://venturezhao.github.io/2013/02/04/20130204.how_to_be_a_gpu_architecture/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="wenzhe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="潜海凌云录">
+      <meta itemprop="description" content="This is wenzhe's personal blog.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="GPU架构师是怎样炼成的 | 潜海凌云录">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          GPU架构师是怎样炼成的
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2013-02-04 00:00:00" itemprop="dateCreated datePublished" datetime="2013-02-04T00:00:00+08:00">2013-02-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-03 18:14:04" itemprop="dateModified" datetime="2023-10-03T18:14:04+08:00">2023-10-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%9C%8B%E4%B8%96%E7%95%8C/" itemprop="url" rel="index"><span itemprop="name">看世界</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>说来我也不是正经做GPU架构的，不过耳濡目染了很久写一写自己的心得。GPU架构设计其实算是一个多学科交叉的领域，尤其是今天这种GPGPU改朝换代的年代，更需要多多吸收相关领域的知识。这包含了计算机体系结构，图形算法，编译技术，集成电路，以及各种流计算应用等五部分~~ 我也会分五个帖子讲完~~ 。其实我主要聚焦在计算机体系结构，图形算法方面，就这两个领域还算是二把刀。其他领域也是不熟悉到当不上二把刀~~ 所以估计我会写前两个章节，分别介绍计算机体系结构，图形算法方面的书籍。其他方面欢迎大牛补充~~~  </p>
+<span id="more"></span>
+
+<p>**<br>第一阶段步入先做一个CPU架构师~**   </p>
+<p>首先是计算机体系结构（Computer Architecture），因为无论是GPU还是CPU归根到底都是处理器(Processor)，而计算机体系结构就是讲解处理器如何工作以及如何权衡取舍各个模块特性参数的一门课程。主要参考书目如下：（读书顺序如编号，参考书目可以根据兴趣穿插在其中~）  </p>
+<p>1.计算机组成和设计：硬件&#x2F;软件接口<br>Computer Organization &amp; Design:The Hardware&#x2F;Software Interface<br>本书就不多说了，组成原理是体系结构的专业基础课程，本书必读！  </p>
+<p>2.《大型RISC处理器设计——用描述语言Verilog设计VLSI芯》<br>本书的阅读要包括没有翻译的高级本，这本书是教你如何组一个工业级别的CPU。可以获得很多硬件上的定量分析的知识。  </p>
+<p>3.量化方法第四版英文版<br>读要包括附录和习题以及参考论文，这本书是体系结构领域的圣经，不读不足以成学过体系结构。  </p>
+<ol start="4">
+<li>Modern Processor Design:Fundamentals of Superscalar Processors <br>《现代处理器设计——超标量处理器基础》<br>这本书也必须做习题，本书讲解了很多处理器设计的实例，要结合书后的参考论文一一阅读。</li>
+</ol>
+<p>5.  Chip Multiprocessor Architecture: Techniques to Improve Throughput and Latency<br>本书主要讲解了面向Web Server的事务处理器的架构应该如何权衡，书中的研究成果来自SUN Niagara得第一手材料。非常具有代表性~书也不厚，可以当做小说来看。  </p>
+<ol start="6">
+<li><p>Embedded Computing: A VLIW Approach to Architecture， Compilers and Tools<br>作为VILW的代表作，必须阅读，其实对VLIW支持可以算在编译器领域，因为VLIW处理器在架构上没有太多难懂的地方。不过这里作为预览，稍后再编译技术学习的时候可以轻松一些。  </p>
+</li>
+<li><p>VLSI Digital Signal Processing Systems:Design and Implementation <br>本书作为DSP里面最经典的微体系结构教材，必读！这本书很工程，没有太多废话，写作效率很高~~~</p>
+</li>
+</ol>
+<p>8.  Stream Processor Architecture<br>本书主要是斯坦福的对于流处理器设计的总结，其中大部份人都去了AMD或是NV做架构，对于研究GPGPU来说，本书必看！从目前已经有过的研究来看，GPGPU还是难以胜任流计算之外的通用计算任务。  </p>
+<ol start="9">
+<li>Parallel Computer Architecture A Hardware&#x2F;Software Approach(Second Edition)<br>本书作为体系结构扩展学习的材料，对于并行计算机讲解的相当深入浅出，虽然年代老了一些，但是技术是不分先进与落后的。要博观约取，日后才能厚积薄发~~<br>此书我没有通读，所以留下遗憾，导致并行架构方面的知识大大欠缺，不足引经据典。日后有时间要补上~~</li>
+</ol>
+<p>10.See MIPS RUN Second RD<br>《MIPS体系结构透视(英文影印版)(第2版) 》<br>这本书其实不是讲解CPU如何设计的，但是讲解了CPU如何与软件互动，作为一本补充阅读的材料是非常的好的。即便软件工程师也推荐阅读。  </p>
+<p>另外，还包括各种总线技术，毕竟总线技术在未来的处理器以及处理器阵列中有不可或缺的意义！必须要搞明白，包括AXI、OCP、PCI、PCI-E，之后就可以看一些关于片上网络（Network on Chip）的书籍和论文（主要是论文。）  </p>
+<p>另外还包括网格等技术相关的书籍和论文都要多多阅读。体系结构的书籍还是相当多的，数目很多，面向方向包括目前非常火爆的低功耗技术如何与处理器架构联系在一起，也包括专门用于网络传输的网络处理器，容错技术,可重构技术等。一脚下去深不见底……学无止境的。所以读书前要确立好目标，千万别看什么NB就学什么，来回换山头。其实读书永远是一个人入门的阶段，做到熟练之后就是大量的阅读论文了，尤其是ACM的论文，不读论文的话就不可能做到一个好的研究成果，因为只有相对稳定和陈旧的理论才回写入书本。最新的科技都是写在论文当中。多读论文可以节省自己大量的时间。  </p>
+<p>ps:另外推荐几本有代表意义的书<br>Computer Architecture Techniques for Power-Efficiency 必读！未来的计算是属于嵌入式的，所以低功耗计算是未来的趋势~~<br>Fault Tolerant Computer Architecture  研究容错体系结构必读，未来的处理器必定会建立在容错片上网络的基础之上，这个技术对于Manycore来说必不可少。<br>Network Processors_Architectures, Protocols and Platforms  网络处理器，可以观摩一下另一种架构~~ ：&gt;<br>Virtual Machines: Versatile Platforms for Systems and Processes  虚拟机技术，其实可以算在编译系统中，不过这里也牵扯到不少架构的东西，这是未来云计算的关键，必须读~~！</p>
+<p>第二步，图形算法：在已有体系结构知识的基础上了解目标应用是一群什么样的特性？   </p>
+<p>CPU作为通用处理器并不需要对某一种应用特别优化，但是图形处理器并非如此。顾名思义，GPU虽然也是Processor，但是他是针对Graphics特别优化的一种处理器。所以不了解图形算法是没有办法设计GPU的，你了解的图形算法越是深入，做应用做得越多，就越是对GPU哪里应该被优化了解得更加深入！当然，我们也通过OpenGL &#x2F;D3D Specification是可以设计出一个完整功能的GPU来，从而在不懂图形算法的情况下也照样设计GPU。但是对于高级的GPU Architect，你是不可能不参加OGL&#x2F;D3D Spec定制会议的（虽然微软的开放程度有待商榷…）。如果不了解算法，那么对于更为先进的支持Raytracing或是其他Global Illumination 的GPU架构来说，更是无从谈起……。对于设计低功耗高性能的嵌入式GPU来说也是无从谈起，因为你根本不知道哪里应该砍掉，而哪里应该保留，更别说哪些硬件裁减多少了……所以这一步，我们要大量的全面地了解图形算法。不仅仅是基于GPU的图形算法，而且包括传统意义上经过CPU验证的数学图形算法。这需要相对深入的数学功底，所以说，数学学不好，就不用做不了非常牛逼得GPU Architect。   </p>
+<p>【如果想从事于更为专业的Graphics Reseracher(图形学大牛)那可以直接看这份书单，】   </p>
+<p>首先，考虑到引发对图形学的兴趣，最好能在代码写后展示出绚丽的图形效果，所以我建议先从OGL&#x2F;D3D API学起。其实OGL和D3D API基本上功能等价，现在OGL 4.0出来了，我更愿意用OGL作为入门工具，没有别的原因，只是OGL不包含微软那套COM编程基础，如们非常容易。   </p>
+<p>1.OpenGL Superbible 4ed <br>《OpenGL超级宝典（第4版）》 <br>这是我觉得写得最好的OGL入门教程。虽然还停留在2.x阶段，但是入门足够了。书上的例子很多，可以一一跑一跑，看看效果。   </p>
+<p>2.OpenGL Shading Language 2ed <br>这本书有中文版，但是我强烈不建议看，除非你不像学会这门语言。上一本书主要讲解了API使用，但是对于GLSL讲解得不多。所以在用这本书打打牢基础。Shader Programing是现代图形硬件的关键，有相当多的算法仰仗SHader，必须给与足够重视。   </p>
+<p>3.《OpenGL编程指南 7ed》 <br>这本书俗称红宝书，没有必要专门看，但是作为工具字典书还是很有必要的，查一查API使用。其实最好的API查阅还是看OGL Spec~  :&gt;而且要设计GPU的话，OGL&#x2F;D3D Spec也是要反反复复看个三四遍得！（顺便提一下，微软的D3D Spec &#x2F; Ref Code是需要和微软签NDA协议才能拿到手的，我记得浙大CAD那边偷偷搞到手过这些文档是源代码，后来泄漏了，还被微软发信警告了某公司~~）   </p>
+<p>对于D3D编程来说看微软的SDK文档就够了也不用折腾去买什么书，微软SDK文档就是最好的书籍，还免费~：〉   </p>
+<ol start="4">
+<li>《3D绘图程序设计:使用Direct3D 10&#x2F;9和OpenGL 2.0》 <br>接下来就是练习各种图形算法以及效果，这里先挑一本简单的书联系一下，这本书写得非常工业化，都是相对来说游戏中比较实用的技术。尽管错误不少，但是学习是足够了。到此为止，你对图形学的学习算是度过第一阶段了，基本完成了入门。接下来要看一系列的中级教程。</li>
+</ol>
+<p>   </p>
+<p>5.GPU Gems 1&#x2F;2&#x2F;3 <br>这是NV组团出版的一本书，可以说是论文集，包含GPU的各个领域，写得非常好，这三本书必读。这是阅读图形学论文的前提。   </p>
+<ol start="6">
+<li>Graphics Gems 系列 <br>这各系列的书虽然有些老，但是也很经典，多多了解从前的设计，从前的图形算法，有助于理解CG的演变以及近些年来优化的主要方向~~</li>
+</ol>
+<p>   </p>
+<p>7.ShaderX 系列 <br>应朋友的要求把这本书加上，这个系列的书我还没来得及看过，（我OUT了……）懂得朋友们可以评价一下~   </p>
+<p>8.Real-time rendering 2&#x2F;3ed <br>本书绝对必读！！！本书在GPU Architecture中的地位堪比CPU中的《量化方法》那本书，包括Reference等论文一定也要看，都是作者精心挑选的，非常经典~~   对于自己的算法只是也是非常开阔的。   </p>
+<p>9.  Procedural Elements for Computer Graphics (2E) <br>《计算机图形学的算法基础（原书第2版）》 <br>对于GPU架构设计来说，本书也是绝对必读！这本书实验必须一一过关，本书讲解最底层的图形算法，这些算法不依赖于任何硬件，虽然年代久远，但是在实时图形学里OGL仰仗的大部分图形算法不也都是七八十年代的么，包括Z&#x2F;S-buffer&#x2F;Edge function Rasterization&#x2F;vertex Transform &#x2F;Ground Shading等等……所以本书必读！   </p>
+<p>基本上到这一步就完成了图形学学习的中级阶段。下一步的高级阶段中，要多多接触一些GI（全局光照）的知识。以及大量的阅读论文，关于GI，的确有很多 书籍可以阅读，比如非常有名气的PBRT，还有很多辐射度算法和体渲染的书籍。当然，我还没混到这个水平，所以不能写出更多的参考书目。但是无论如何，图形学的发展速度可比计算机体系结构要快很多，不读论文，基本上就看看书是没有用处的。所以必读大量的读论文，包括最基本的siggraph论文等等~~<br>另外，modeling建模 也是一个非常NB的方向，最好也学习学习，不然人家一说Tessellation，都不知道背后的数学理论和硬件简化会出现在哪里，那就逊了%……   </p>
+<p>本人水平有限，能列举的都是基本上国内能找的到的书籍。最后再补充一下，数学一定要学好，没有数学就没有图形学。一个连点到平面距离都不会计算的工程师是不可能做到很NB的GPU Architect的~~</p>
+<p>第三步，编译技术与Runtime层：链接算法与硬件</p>
+<p>第四步，集成电路技术：加强硬件架构设计能力</p>
+<p> 第五步，接触各种流计算应用：这是GPGPU设计的前提。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/VLSI/" rel="tag"># VLSI</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2008/12/31/20081231.classical_msn_sinatures/" rel="prev" title="2007年MSN经典签名档">
+                  <i class="fa fa-angle-left"></i> 2007年MSN经典签名档
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2013/03/13/20130313.changing_backlight_brightness_on_ubuntu12.10/" rel="next" title="Changing backlight brightness on Ubuntu 12.10​">
+                  Changing backlight brightness on Ubuntu 12.10​ <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">wenzhe</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.8/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
