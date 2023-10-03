@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"venturezhao.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":"auto","version":"8.18.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="心目中的编程高手 (1)Bill Joy, 前任Sun的首席科学家，当年在Berkeley时主持开发了最早版本的BSD。他还是vi和csh的作者。当然，Csh Programming Considered Harmful 是另一个话题乐。据说他想看看自己能不能写个操作系统，就在三天里写了个自己的Unix, 也就是BSD的前身。当然是传说了，但足见他的功力。另一个传说是，1980年初的时候，DARP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我心目中的编程高手">
+<meta property="og:url" content="http://venturezhao.github.io/2009/12/30/20091230.god_of_programmer/index.html">
+<meta property="og:site_name" content="潜海凌云录">
+<meta property="og:description" content="心目中的编程高手 (1)Bill Joy, 前任Sun的首席科学家，当年在Berkeley时主持开发了最早版本的BSD。他还是vi和csh的作者。当然，Csh Programming Considered Harmful 是另一个话题乐。据说他想看看自己能不能写个操作系统，就在三天里写了个自己的Unix, 也就是BSD的前身。当然是传说了，但足见他的功力。另一个传说是，1980年初的时候，DARP">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2009-12-29T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-10-03T11:23:19.077Z">
+<meta property="article:author" content="wenzhe">
+<meta property="article:tag" content="Technology">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://venturezhao.github.io/2009/12/30/20091230.god_of_programmer/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://venturezhao.github.io/2009/12/30/20091230.god_of_programmer/","path":"2009/12/30/20091230.god_of_programmer/","title":"我心目中的编程高手"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>我心目中的编程高手 | 潜海凌云录</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">潜海凌云录</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">路漫漫其修远兮，吾将上下而求索</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">wenzhe</p>
+  <div class="site-description" itemprop="description">This is wenzhe's personal blog.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://venturezhao.github.io/2009/12/30/20091230.god_of_programmer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="wenzhe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="潜海凌云录">
+      <meta itemprop="description" content="This is wenzhe's personal blog.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="我心目中的编程高手 | 潜海凌云录">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          我心目中的编程高手
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2009-12-30 00:00:00" itemprop="dateCreated datePublished" datetime="2009-12-30T00:00:00+08:00">2009-12-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-03 19:23:19" itemprop="dateModified" datetime="2023-10-03T19:23:19+08:00">2023-10-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%9C%8B%E4%B8%96%E7%95%8C/" itemprop="url" rel="index"><span itemprop="name">看世界</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>心目中的编程高手 (1)<br>Bill Joy, 前任Sun的首席科学家，当年在Berkeley时主持开发了最早版本的BSD。他还<br>是vi和csh的作者。当然，Csh Programming Considered Harmful 是另一个话题乐。据<br>说他想看看自己能不能写个操作系统，就在三天里写了个自己的Unix, 也就是BSD的前身<br>。当然是传说了，但足见他的功力。另一个传说是，1980年初的时候，DARPA让BBN在Be<br>rkley Unix里加上BBN开发的TCP&#x2F;IP代码。但当时还是研究生的B伯伯怒了，拒绝把BBNT<br>CP&#x2F;IP加入BSD，因为他觉得BBN的TCP&#x2F;IP写得不好。于是B伯伯出手了，端的是一箭封喉<br>，很快就写出了高性能的伯克利版TCP&#x2F;IP。当时BBN和DARPA签了巨额合同开发TCP&#x2F;IPSt<br>ack，谁知他们的代码还不如一个研究生的好。于是他们开会。只见当时B伯伯穿个T-sh<br>irt出现在会议室(当时穿T-shirt不象现在，还是相当散漫的哈)。只见BBN问：你怎么写<br>出来的？而B伯伯答：简单，你读协议，然后编程就行了。最令偶晕倒的是，B伯伯硕士<br>毕业后决定到工业界发展，于是就到了当时只有一间办公室的Sun, 然后他就把Sparc设<br>计出来乐。。。象这种软硬通吃的牛人，想不佩服都不行的说。据Bill Joy的同事说，<br>一般开会的时候B伯伯总是拿一堆杂志漫不经心地读。但往往在关键之处，B伯伯发言，<br>直切要害，提出漂亮的构想，让同事们彻底崩溃。对了，他还是ｊａｖａ Spec和JINI的主要<br>作者之一。  </p>
+<span id="more"></span>
+<p>心目中的编程高手 (2)<br>– John Carmack John Carmack，id Software的founder和Lead Programmer。上个月和<br>一个搞图形的师兄聊天，他竟然不知道John Carmack, 也让偶大大地晕了一把。不过也<br>许搞研究的和搞实战的多少有些隔吧。想必喜欢第一人称射击游戏的都知道J哥哥。90年<br>代初只要能在PC上搞个小动画都能让人惊叹一番的时候，J哥哥就推出了石破天惊的Cas<br>tle Wolfstein, 然后再接再励，doom, doomII, Quake…每次都把3-D技术推到极致。<br>J哥哥的简历上说自己的专长是”Exhaust 3-D technology”，真是牛人之言不我欺的说。<br>做J哥哥这样的人是很幸福的，因为各大图形卡厂家一有了新产品就要向他“进贡” ，<br>不然如果他的游戏不支持哪种卡，哪种卡基本就会夭折乐。当初MS的Direct3D也得听取<br>他的意见，修改了不少API。当然，J哥哥在结婚前十数年如一日地每天编程14小时以上<br>，也是偶们凡人望尘莫及的。对了，J哥哥高中肆业(？)，可以说是自学成才。不过呢，<br>谁要用这个例子来为自己学习不好辩护，就大错特错了。那 Leonardo Da Vinci还是自<br>学成才呢(人是私生子，不能上学)。普通人和天才还是有区别的。对了，其实偶们叫“<br>达分奇”是相当不对的，因为Vinci是地名，而Da Vinci就是从Vinci来的人的意思。换<br>句话说，Leonardo Da Vinci就是“从Vinci来的Leonardo”的意思。叫别人“Da Vinci<br>”就不知所谓乐。嗯，扯远了，打住。  </p>
+<p>心目中的编程高手 (3)<br>– David Cutler David Cutler，VMS和Windows NT的首席设计师，去微软前号称硅谷最<br>牛的kernel开发员。当初他和他的手下在微软一周内把一个具备基本功能的bootable k<br>ernel写出来，然后说：“who can’t write an OS in a week?”，也是牛气冲天的说。<br>顺便说一句，D爷爷到NT3.5时，管理1500名开发员，自己还兼做设计和编程，不改code<br>r本色啊。D爷爷天生脾气火爆，和人争论时喜欢双手猛击桌子以壮声势。:-) 日常交谈<br>F-word不离口。他面试秘书时必问：”what do you think of the word ‘****’?” ，让<br>无数美女刹羽而归。终于有一天，一个同样火爆的女面对这个问题脱口而出：”That’s<br>my favorite word”。于是她被录取乐，为D爷爷工作到NT3.5发布。<br>心目中的编程高手 (4)<br>– Donald E. Knuth Don Knuth。高爷爷其实用不着偶多说。学编程的不知道他就好像<br>学物理的不知道牛顿，学数学的不知道欧拉，学音乐的不知道莫扎特，学Delphi的不知<br>到 Anders Hejlsberg，或者学Linux不知道Linus Torvalds一样，不可原谅啊。:-)为了<br>让文章完整，就再罗唆几句吧。高爷爷本科时就开始给行行色色的公司写各种稀奇古怪<br>的编译器挣外快了。他卖给别人时收一两千美元，那些公司拿了code，加工一下卖出去<br>就是上万上十万。不过也没见高爷爷不爽过，学者本色的说。想想那可是60年代初啊，<br>高爷爷写编译器写多了，顺带就搞出了个Attribute Grammar和LR(k)，大大地造福后人<br>啊。至于高爷爷在CalTech的编程比赛(有Alan Kay得众多高高手参加)总是第一，写的T<br>ex到86年就code freeze，还附带2^n美分奖励等等都是耳熟能详，偶就不饶舌乐。顺便<br>说一下，高老大爷是无可争议的写作高手。他给Concrete Mathematics 写的前言可谓字<br>字铿锵，堪为前言的典范。他的技术文章也是一绝，文风细致，解释精当，而且没有学<br>究气，不失轻快跳脱。记得几年前读Concrete Mathematics，时不时开怀大笑，让老妈<br>极其郁闷，觉得我nerdy到家，不可救药。其实呢，子非鱼，安知鱼之乐，更不知那完全<br>是高爷爷的功劳。说到写作高手，不能不提Stephen A. Cook。他的文章当年就被我们的<br>写作老师极力推荐，号称典雅文风的样本。库爷爷一头银发，身材颀长，总是面带谦和<br>的微笑，颇有仙风道骨，正好和他的仙文相配的说。高爷爷其实还是开源运动的先驱。<br>虽然他没有象Richard Stallman那样八方奔走，但他捐献了好多作品，都可以在网上看<br>到，比如著名的Mathematical Writing，MMIXWare，The Tex Book等，更不用说足以让<br>他流芳百世的Tex乐。  </p>
+<p>心目中的编程高手 (5)<br>– Ken Thompson Ken Thompson，C语言前身B语言的作者，Unix的发明人之一(另一个是<br>Dennis M. Riche老大，被尊为DMR)，Belle(一个厉害的国际象棋程序)的作者之一, 操<br>作系统Plan 9的主要作者(另一个是大牛人Rob Pike, 前不久被google挖走了)。Ken爷爷<br>也算是计算机历史上开天辟地的人物了。1969年还是计算机史前时代，普通人都认为只<br>有大型机才能运行通用的操作系统，小型机只有高山仰止的份儿。至于用高级语言来写<br>操作系统，更是笑谈。Ken爷爷自然不是池中物，于是他和DMR怒了，在1969年到1970间<br>用汇编在PDP-7上写出了UNIX的第一个版本。他们并不知道，一场轰轰烈烈的UNIX传奇由<br>此拉开了序幕。Ken爷爷在1971年又把Unix用C重写，于是C在随后20年成就了不知多少豪<br>杰的梦想和光荣。Ken爷爷还有段佳话：装了UNIX的PDP-11最早被安装在Bell Lab里供大<br>家日常使用。很快大家就发现Ken爷爷总能进入他们的帐户，获得最高权限。Bell Lab里<br>的科学家都心比天高，当然被搞得郁闷无比。于是有高手怒了，跳出来分析了UNIX代码<br>，找到后门，修改代码，然后重新编译了整个UNIX。就在大家都以为“这个世界清净了<br>”的时候，他们发现Ken爷爷还是轻而易举地拿到他们的帐户权限，百思不解后，只好继<br>续郁闷。谁知道这一郁闷，就郁闷了14年，直到Ken爷爷道出个中缘由。原来，代码里的<br>确有后门，但后门不在Unix代码里，而在编译Unix代码的C编译器里。每次C编译器编译<br>UNIX的代码，就自动生成后门代码。而整个Bell Lab的人，都是用Ken爷爷的C编译器。  </p>
+<p>心目中的编程高手 (6)<br>– Rob Pike Rob Pike, AT&amp;T Bell Lab前Member of Technical Staff ，现在google研<br>究操作系统。罗伯伯是Unix的先驱，是贝尔实验室最早和Ken Thompson以及Dennis M.<br>Ritche开发Unix的猛人，UTF-8的设计人。他还在美国名嘴David Letterman的晚间节目<br>上露了一小脸，一脸憨厚地帮一胖子吹牛搞怪。让偶佩服不已的是，罗伯伯还是1980年<br>奥运会射箭的银牌得主。他也是个颇为厉害的业余天文学家，设计的珈玛射线望远镜差<br>点被NASA用在航天飞机上。他还是两本经典，The Unix Programming Environment 和<br>The Practice of Programming 的作者之一。如果初学者想在编程方面精益求精，实在<br>该好好读读这两本书。它们都有中文版的说。罗伯伯还写出了Unix下第一个基于位图的<br>窗口系统，并且是著名的blit 终端的作者。当然了，罗伯伯还是号称锐意革新的操作系<br>统，Plan9，的主要作者。可惜的是，Plan9并没有引起多少人的注意。罗伯伯一怒之下<br>，写出了振聋发聩的雄文 Systems Software Research is Irrelevant，痛斥当下系统<br>开发不思进取，固步自封的弊病。虽然这篇文章是罗伯伯含忿出手，颇有偏激之词，但<br>确实道出了系统开发的无奈：开发周期越来越长，代价越来越大，用户被统一到少数几<br>个系统上，结果越来越多的活动是测量和修补，而真正的革新越来越少。就在罗伯伯郁<br>闷之极的时候，google登门求贤来乐。如果说现在还有一家大众公司在不遗余力地把系<br>统开发推向极致的话，也就是google 乐。随便看看google的成果就知道了。具有超强容<br>错和负载平衡能力的分布式文件系统GFS (现在能够用100,000台廉价PC搭起一个巨型分<br>布系统，并且高效便宜地进行管理的系统也不多哈)，大规模机器学习系统(拼写检查，<br>广告匹配，拼音搜寻。。。哪个都很牛的说)，更不用说处理海量并行计算的各式googl<br>e服务了。Rob在System Software Research is Irrelevant里萧瑟地说现在没有人再关<br>心系统研究的前沿成果了。想不到他错了，因为google关心。google网络了大批功成名<br>就的牛人，还有大量初生牛犊般博士做开发，显然不是没事耍酷，而是因为它们的开发<br>总是试图吸取系统研究的最新成果。 想必Rob Pike在google很幸福。愿他做出更棒的系<br>统。  </p>
+<p>心目中的编程高手 (7)<br>– Dennis M. Ritchie 既然Ken Thompson是我的偶像，新闻组上人称DMR的Dennis M.<br>Ritchie自然也是，毕竟两人共同缔造了UNIX，而Dennis几乎独力把C搞大(当然，C的前<br>身是B，而B是Ken Thompson一手做出来的)。J 两人1983年分享图灵奖，是有史以来少数<br>几个因工程项目得奖的工程师(本来是唯一的一对儿，但Alan Kay才因为SmallTalk得奖<br>，所以就成了唯二的乐) 。一个人一生能做出一个卓越的系统已经不易，DMR的C和UNIX<br>长盛不衰近30年，至今生机勃勃，DMR此生可以无憾的说。D爷爷也算有家学渊源：他老<br>爸在AT&amp;T贝尔实验室工作了一辈子，并在电路设计方面卓有成就，还出了本颇有影响的<br>书The Design of Switching Circuits，据说在交换理论和逻辑设计方面有独到的论述<br>。当然，D爷爷和他老爸是不同时代的人：他老爸的研究成形于晶体管发明之前，而D爷<br>爷的工作离了晶体管就玩儿不转乐。:-D不要看D爷爷搞出了C，其实他最爱的编程语言是<br>Alef，在Plan9上运行，支持并行编程。Alef的语法和C相似，但数据类型和执行方式都<br>和C大大不同。说到语言，D爷爷对后来人有非常中肯的建议：抱着学习的目的来开发你<br>自己的语言，不要冀望于它被众人接受。这个建议不光对语言开发有用，也适用于其它<br>大型系统的开发。别的不说，DMR后来领导自己的团队在1995年和1996分别推出了Plan9<br>和 Inferno操作系统，又用多少人知道呢？其实，D爷爷当初也没想过C会风行世界。他<br>开发C的初衷和 Eric S. Raymond在Cathedral and Bazaar里阐述的一样，就是要消除自<br>己对现有工具的不爽之处。谁知D爷爷无心插柳，C竟然受到众多程序员的狂热拥戴，连<br>D爷爷自己都大惑不解。在一次采访中D爷爷说大概那是因为C的抽象程度碰巧既满足了程<br>序员的要求, 又容易实现。当然C一度是Unix上的通用语言也是原因。但不管怎么说，D<br>爷爷对编程语言出色的审美意识奠定了C广为流传的基础。最后八卦一下。D爷爷的业余<br>爱好和NBA大牛Karl Malone一样：开卡车。不过D爷爷更喜欢开NASCAR，而KM独爱巨无霸<br>。J D爷爷自称心中不供偶像，如果一定要说一个，那就是Ken Thompson了。现在Ken爷<br>爷退休当飞机教练去了，而D爷爷当了贝尔实验室系统开发部的头，整日忙于开支票。他<br>俩合作20年，屡屡创造历史。这段令人神往的佳话，也就长留你我心中乐。P.S., 很多<br>人都以为Brian W. Kernighan是C的作者。其实BWK只是写了那本经典K&amp;R C。据D爷爷说<br>，他，Ken, 和Kernighan三人中，Kernighan最能写文章，他次之，而Ken写得最少；但<br>说到编程，Ken爷爷才是当之无愧的老大。  </p>
+<p>心目中的编程高手 (8)<br>– Edsger Wybe Dijkstra 对，就是E.W. Dijkstra. 一提到EWD，很多人就会想起找最<br>短路径的Dijkstra Algorithm，就好像一提到Sir. Tony Hoare，就想起Quick Sort一样<br>。其实这些个算法不过是两个牛人在他们职业生涯中最琐碎的贡献。比如Dijkstra算法<br>，无非是戴爷爷在1956年为了展示新计算机 ARMAC的计算能力，初试身手的成果，属于<br>他的算法处女作。据戴爷爷自述，他搞出最短路径算法的时候连纸笔都没用。当时他和<br>他老婆在阿姆斯特丹一家咖啡厅的阳台上晒太阳喝咖啡，突然就把这个算法想出来乐。<br>而且当时的算法研究还比较原始，牛人们忙着用计算机搞数值计算，对离散算法不屑一<br>顾。那时连一个象样的专注于离散算法的专业期刊都没有。戴爷爷于是推迟发表这个算<br>法。直到1959年，他才把这个算法发表在Numerische Mathematik的创刊号上，权为捧场<br>。:-) EWD在多个领域牛气冲天，端的是理论和编程两手硬的高手。只不过他的很多工作<br>比较深刻，学校的老先生们觉得本科生接受不了，不给本科生讲而已。戴爷爷大概因为<br>最短路径算法一战成名，于是有人请他参加另一台计算机X1的设计工作，并且把设计实<br>时中断系统的任务派给了他。现在看来实时中断也许不算什么，但要知到，X1前根本就<br>没有实时中断的概念。实现它简直就是一场豪赌。戴爷爷起初还不情愿，但经不住项目<br>负责人Bram和Carel的轮番“吹捧”：我们知道实时中断让您工作变得非常困难，但象您<br>这样的牛人肯定能做出来的说。结果戴爷爷被糖衣炮弹彻底击穿，接下了这个烫手山芋<br>。两三年后，他不仅搞出了实时中断，还围绕这个写出了自己的博士论文，顺利戴上博<br>士帽。让戴爷爷真正成名立万的还是在X1上开发的Algo60，最早的高级语言之一。戴爷<br>爷没日没夜地工作了8个月，就搞出了Algo60，也因此获得了1972年的图灵奖。因为Alg<br>o60，戴爷爷发表了一篇石破天惊的文章：Recursive Programming，于是人们才知道，<br>原来高级语言也可以高效地实现递归，原来从此以后，所有程序员都不可避免地和戴爷<br>爷发明的一个词(应该说是概念)打交道：堆栈。而且Algo60还让戴爷爷深入地思考多道<br>程序设计的问题，最终发明了每个系统程序员都绕不开的概念：semaphore。当然，戴爷<br>爷总是把他发明的概念严格形式化，极具科学家本色的说。和这些成就想比，他提出的<br>吃饭的哲学家问题，也就没什么好说的了。说来好笑，当时的大学(忘了哪所了)还是觉<br>得戴爷爷没有受过正统的数学训练，也不是专门搞数值分析的，所以最后不太情愿地给<br>了他一个教职。这种小挫折并不能妨碍象戴爷爷这样的牛人创造历史。他一边教数值分<br>析(:-D) ，一边开始开发一个新的操作系统，并培养计算机科学家。几年后，THE Mult<br>iprogramming System横空出世。THE是第一个支持松散耦合，显式同步的进程并由此使<br>得严格证明系统没有死锁变得容易的操作系统。可惜戴爷爷任职的系不识货，还强行解<br>散了他的研究小组(1972年戴爷爷给他的系主任说他得了图灵奖，系主任的第一反应是你<br>们搞计算机就喜欢乱发奖)。这让戴爷爷相当郁闷，得了抑郁症。在极度郁闷之中，戴爷<br>爷决定用写作来治疗自己的抑郁症。于是经典就诞生乐：Notes on Structured Progra<br>mming。戴爷爷从此被尊为结构化编程的奠基人，而且他的抑郁症也被治好乐。EWD太牛<br>，结果他的故事也太多。先到这里吧。1973起，他的故事就在美国发生了。  </p>
+<p>心目中的编程高手 (9)<br>Anders Hejlsberg，微软.NET的首席架构师，编程语言设计和实现的顶尖高手。他一手<br>做出了Turbo Pascal, 也是Delphi,J++(尤其是WFC)，C#,和.NET的主要作者。这些作品<br>的名字足以为他立传。作为一个程序员，我在这样的大师面前实在无语。生子当如Ande<br>rs的说。李维的&lt;&lt;Borland传奇&gt;&gt;里已详细讲述了Anders的传奇故事，我就不用费舌了：<br><a target="_blank" rel="noopener" href="http://java.mblogger.cn/iexploiter/posts/1505.aspx%E3%80%82">http:&#x2F;&#x2F;ｊａｖａ.mblogger.cn&#x2F;iexploiter&#x2F;posts&#x2F;1505.aspx。</a> Artima上有Anders谈C#的<br>系列访谈 。MSDN上有一段Anders导游的录像 。有兴趣可以去看看牛人的丰采。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Technology/" rel="tag"># Technology</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2009/12/27/20091227.my_world_view/" rel="prev" title="我的世界观">
+                  <i class="fa fa-angle-left"></i> 我的世界观
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2013/02/04/20130204.how_to_be_a_gpu_architecture/" rel="next" title="GPU架构师是怎样炼成的">
+                  GPU架构师是怎样炼成的 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">wenzhe</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.8/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
